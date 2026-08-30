@@ -3,13 +3,14 @@ import java.util.Scanner;
 
 public class string {
 
-    Public
+    public static String substring(String str, int start, int end) {
+        return str.substring(start, end);
+    }
 
-    static void main(String args[]) {
+    public static void main(String args[]) {
         Scanner sc = new Scanner(System.in);
-        String str4 = sc.nextLine();
-        String str1 = sc.nextLine();
-        System.out.println(str4);
-        System.out.println(str1);
+        String str = sc.nextLine();
+
+        System.out.println(substring(str, 0, 3));
     }
 }

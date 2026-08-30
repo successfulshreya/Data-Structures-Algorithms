@@ -1,6 +1,6 @@
 
 class Laptop {
-//CLASS AND AITS PROPERTIES
+//CLASS AND ITS PROPERTIES
 
     String name;
 
