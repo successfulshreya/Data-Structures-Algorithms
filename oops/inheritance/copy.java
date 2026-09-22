@@ -11,7 +11,7 @@ class Ajj{
        this.color=b.color;
     }
 }
-public class ajj{
+public class copy{
     public static void main (String args[]){
 
      Ajj f1 = new Ajj("yeloow",1);

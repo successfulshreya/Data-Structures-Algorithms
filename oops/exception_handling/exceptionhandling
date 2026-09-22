@@ -1,0 +1,164 @@
+Exception Handling
+
+# Step 1: Real-Life Example se Samjho (Exception Kya Hota Hai?)
+
+> Java me Exception: Program chalte waqt (Runtime) aane wali unexpected error, jis se aapka program crash ho sakta hai.
+> Exception Handling: Us error ko catch karna taaki program crash na ho aur aage ka code chalta rahe.
+
+---
+
+### Step 2: Jab Exception Aati Hai Toh Kya Hota Hai? (Bina Handling Ke)
+
+Pehle dekhte hain bina handling ke kya hota hai:
+
+```java
+public class UnhandledExample {
+    public static void main(String[] args) {
+        System.out.println("Line 1: Program Shuru");
+
+        int a = 10;
+        int b = 0;
+        int result = a / b; // ❌ ArithmeticException! (0 se divide nahi kar sakte)
+
+        System.out.println("Result: " + result); // Ye line kabhi chalegi hi nahi
+        System.out.println("Line 2: Program Khatam");
+    }
+}
+
+```
+
+Output Terminal par:
+
+```text
+Line 1: Program Shuru
+Exception in thread "main" java.lang.ArithmeticException: / by zero
+
+```
+
+> Program `a / b` par hi crash ho gaya! "Program Khatam" wali line tak pohanch hi nahi paya.
+
+---
+
+### Step 3: Try-Catch se Exception Handle Karo (Stepney Lagao)
+
+Java me exception handle karne ke liye hum `try` aur `catch` block ka use karte hain:
+
+- `try` block: Iske andar wo risk wala code rakho jisme error aa sakti hai.
+- `catch` block: Agar `try` me error aayi, toh ye us error ko pakad (catch) lega aur crash hone se bachayega.
+
+#### Code Example:
+
+```java
+public class HandledExample {
+    public static void main(String[] args) {
+        System.out.println("Line 1: Program Shuru");
+
+        try {
+            int a = 10;
+            int b = 0;
+            int result = a / b; // Risk wala code
+            System.out.println("Result: " + result);
+        } catch (ArithmeticException e) {
+            // Error aane par ye block chalega
+            System.out.println("❌ Error aayi hai: Zero se divide nahi kar sakte!");
+        }
+
+        System.out.println("Line 2: Program Khatam (Crash nahi hua!)");
+    }
+}
+
+```
+
+Output Terminal par:
+
+```text
+Line 1: Program Shuru
+❌ Error aayi hai: Zero se divide nahi kar sakte!
+Line 2: Program Khatam (Crash nahi hua!)
+
+```
+
+> Dekha? Error aayi, handle hui, aur program smoothly poora chala!
+
+---
+
+### Step 4: Exception Handling Ke 5 Main Keywords
+
+Java me Exception Handling in 5 keywords par chalti hai:
+
+1. `try`: Risk wala code likhne ke liye.
+2. `catch`: Exception ko pakadne (handle karne) ke liye.
+3. `finally`: Ye block hamesha chalega, chahe error aaye ya na aaye (e.g., file close karna, database disconnect karna).
+4. `throw`: Apni marzi se koi custom exception throw (raise) karne ke liye.
+5. `throws`: Function ke aage declare karne ke liye ki ye function exception de sakta hai.
+
+---
+
+### Step 5: `finally`, `throw`, aur `throws` Ka Code Example
+
+#### 1. `finally` Block Example
+
+```java
+try {
+    int data = 25 / 5;
+    System.out.println("Data: " + data);
+} catch (Exception e) {
+    System.out.println(e);
+} finally {
+    // Ye line HAR HALAT ME chalegi
+    System.out.println("Finally block: Main hamesha chalta hu!");
+}
+
+```
+
+#### 2. `throw` Keyword Example (Custom Validation)
+
+```java
+public class AgeChecker {
+    public static void checkAge(int age) {
+        if (age < 18) {
+            // Manual error throw kar rahe hain
+            throw new ArithmeticException("Voting ke liye age 18+ honi chahiye!");
+        } else {
+            System.out.println("Aap vote de sakte hain!");
+        }
+    }
+
+    public static void main(String[] args) {
+        try {
+            checkAge(15);
+        } catch (ArithmeticException e) {
+            System.out.println("Exception pakdi gayi: " + e.getMessage());
+        }
+    }
+}
+
+```
+
+---
+
+### Types of Exceptions (Interviews ke liye zaroori)
+
+Java me 2 main types ki exceptions hoti hain:
+
+1. Checked Exceptions (Compile-time):
+
+- Java ka compiler aapko code likhte waqt hi bolta hai ki "Ise handle karo!".
+- _Example:_ `FileNotFoundException`, `IOException`, `SQLException`.
+
+2. Unchecked Exceptions (Runtime):
+
+- Compile time par nahi pata chalta, program chalte waqt error aati hai (Aapki galat logic ki wajah se).
+- _Example:_ `ArithmeticException` (divide by zero), `NullPointerException`, `ArrayIndexOutOfBoundsException`.
+
+---
+
+### Summary Table
+
+| Keyword   | Kaam                                             |
+| --------- | ------------------------------------------------ |
+| `try`     | Risk wala code iske andar daalo.                 |
+| `catch`   | Error ko handle karne ka code yahan likho.       |
+| `finally` | Cleanup code jo har haal me chalega.             |
+| `throw`   | Apne logic se exception manual raise/throw karo. |
+| `throws`  | Method signature par warning dene ke liye.       |
